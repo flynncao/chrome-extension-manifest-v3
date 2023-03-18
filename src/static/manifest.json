@@ -14,7 +14,10 @@
 	},
 	"permissions": [
 		"scripting",
-		"bookmarks"
+		"bookmarks",
+		"tabs",
+		"identity",
+		"storage"
 	],
 	"background": {
 		"service_worker": "background.js"
@@ -29,5 +32,8 @@
 				"contentScript.js"
 			]
 		}
-	]
+	],
+	"chrome_url_overrides": {
+		"newtab": "newTab.html"
+	}
 }
