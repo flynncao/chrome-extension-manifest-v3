@@ -1,16 +1,36 @@
-import React from "react";
+import React, { FormEventHandler, useEffect } from "react";
 
-import "./popup.css";
+import "../assets/tailwind.css";
+
+const handleInput = (e) => {
+  const name = e.target[0].value;
+  chrome.storage.sync.set({ name }, () => {
+    console.log(`Name is set to ${name}`);
+  });
+};
+
 const Popup = () => {
+  useEffect(() => {
+    chrome.storage.sync.get(["name"], (res) => {
+      console.log("res", res);
+    });
+  }, []); // Run only once
   return (
-    <div>
-      <h1 className="text-5xl text-green-500">Hello World</h1>
-      <p className="text-gray-500 text-2xl">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet quod
-        saepe dolore numquam blanditiis voluptas aspernatur, temporibus ipsam!
-        Praesentium perferendis quod unde repellendus reprehenderit dolores
-        officia doloribus ipsam velit sit.
-      </p>
+    <div className="popup">
+      <form
+        className="flex justify-center items-center py-44"
+        onSubmit={handleInput}
+      >
+        <input
+          type="text"
+          name="name"
+          className="bg-gray ring-black px-4 py-4"
+          placeholder="What's your task today?"
+        />
+        <button className="py-4 px-3 bg-indigo-500 text-white m-2 rounded">
+          Confirm
+        </button>
+      </form>
     </div>
   );
 };
