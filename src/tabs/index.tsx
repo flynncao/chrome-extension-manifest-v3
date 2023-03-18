@@ -1,7 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "../assets/tailwind.css";
-import Popup from "./tabs";
+import Tabs from "./tabs";
+import { HashRouter as Router } from "react-router-dom";
 
 function init() {
   const appContainer = document.createElement("div");
@@ -11,7 +12,11 @@ function init() {
   }
   const root = createRoot(appContainer);
   console.log(appContainer);
-  root.render(<Popup />);
+  root.render(
+    <Router>
+      <Tabs />
+    </Router>
+  );
 }
 
 init();
